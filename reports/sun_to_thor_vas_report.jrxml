@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sun_to_thor_vas_report" pageWidth="135" pageHeight="15" columnWidth="135" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="59b9981c-b8c4-4fe7-8663-a4b378460b28">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="delimiter" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="currency" class="java.lang.String"/>
+	<field name="cost_base" class="java.lang.String"/>
+	<field name="total" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="60" y="0" width="32" height="15" uuid="1346fdfd-f566-4023-b2ff-ed5d5a09412c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4aa4542a-2f78-4dbb-8a6e-46cc895f1355"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="2">
+					<pen lineColor="#D6CECE"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="60" height="15" uuid="b9b63530-b153-4bf8-9329-7ead3f1d7010">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ea29fa3c-b2eb-407b-828d-ad4928d51eb7"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box leftPadding="2">
+					<pen lineColor="#D6CECE"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cost_base}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="0" width="43" height="15" uuid="72370e34-990a-4629-865e-a495b1e58bb7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="54aeac6a-5dca-4519-9fa6-b0b8f186bccc"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box rightPadding="2">
+					<pen lineColor="#D6CECE"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D6CECE"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format("%.2f", $F{total}).replace('.', ($P{delimiter}.charAt(0)))]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

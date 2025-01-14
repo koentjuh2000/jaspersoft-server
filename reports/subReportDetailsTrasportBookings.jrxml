@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportDetailsTrasportBookings" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a903b966-27be-4f26-97ea-cbd2fa03d351">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
+	<parameter name="goods" class="java.lang.String"/>
+	<parameter name="gross" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="lalo_type" class="java.lang.String"/>
+	<field name="delivery" class="java.util.LinkedHashMap"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="reference" class="java.lang.String"/>
+	<field name="goods" class="java.lang.String"/>
+	<field name="gross" class="java.lang.Double"/>
+	<field name="documents" class="java.lang.String"/>
+	<field name="trucking_rate" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{lalo_type}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="104" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$F{lalo_type}.equals("DELIVERYSE") ? false : true]]></printWhenExpression>
+			<textField>
+				<reportElement x="0" y="0" width="77" height="13" uuid="9681d3c9-060c-47c6-a37c-68dbc96d4037">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lalo_type}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="100" y="14" width="201" height="13" isRemoveLineWhenBlank="true" uuid="ece36267-9cab-45d9-8d18-87780bc4673a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{delivery}.get("address")+", "+$F{delivery}.get("postcode")+" "+$F{delivery}.get("city")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="340" y="0" width="60" height="13" uuid="db6de740-536b-4549-be19-b2a4f9dbb04b">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="340" y="13" width="60" height="13" uuid="16bd7e76-5c7c-4dc4-a320-d09fadb3076d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE/TIME:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="100" y="0" width="201" height="13" isRemoveLineWhenBlank="true" uuid="083ca66e-643e-4e92-b665-2a79eaa9fce8">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{delivery}.get("name") !=null ? $F{delivery}.get("name") : ""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="414" y="0" width="171" height="13" uuid="63d12a5c-b290-4930-9fa2-ad9bedb0a448">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reference} !=null ? $F{reference}: ""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement stretchType="RelativeToTallestObject" x="414" y="13" width="171" height="13" uuid="53aaa4d7-8a85-4f3c-bfeb-3db8e3cd72b9">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date} !=null ? $F{date} : ""]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="100" y="46" width="230" height="13" isRemoveLineWhenBlank="true" uuid="0c9027fc-8b31-437e-9a71-290f0ec8c6d4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{lalo_type}.equals("LOADING") || $F{lalo_type}.equals("DELIVERY") ? true : false]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{goods}.replace(';', '\n')]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="100" y="33" width="41" height="13" isRemoveLineWhenBlank="true" uuid="7a0083d9-54a8-41cf-bf1a-867712a7be16">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$F{lalo_type}.equals("LOADING") || $F{lalo_type}.equals("DELIVERY") ? true : false]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GOODS:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="187" y="59" width="143" height="13" isRemoveLineWhenBlank="true" uuid="4c629be2-fafc-44f4-8c13-c8d011eaee4f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{lalo_type}.equals("LOADING") || $F{lalo_type}.equals("DELIVERY") ? true : false]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[String.format("%.0f", $F{gross}) +" KGS"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="100" y="59" width="86" height="13" isRemoveLineWhenBlank="true" uuid="d220a577-8f70-4db9-8e91-9aeb25dd9254">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$F{lalo_type}.equals("LOADING") || $F{lalo_type}.equals("DELIVERY") ? true : false]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL PAYLOAD:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement key="" positionType="Float" x="187" y="73" width="180" height="13" isRemoveLineWhenBlank="true" uuid="d6d24cc5-6d31-48d7-8ccc-73c510a582b5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{delivery}.get("remark") !=null ? $F{delivery}.get("remark"): ""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="100" y="73" width="60" height="13" isRemoveLineWhenBlank="true" uuid="91f3bd01-faf0-4b26-9863-1dc77d5034a9">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$F{delivery}.get("remark") == null || $F{delivery}.get("remark") == "" ? false : true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REMARK:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="338" y="33" width="245" height="13" isRemoveLineWhenBlank="true" uuid="877f176b-1ad5-490f-9ee7-806349875eb0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<printWhenExpression><![CDATA[$F{lalo_type}.equals("LOADING") ? true : false]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="2"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CUSTOMS DOC:  " + ($F{documents}.contains("YES") ? $F{documents}.replace(';', '\n')  : "")]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
