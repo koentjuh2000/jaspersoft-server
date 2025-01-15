@@ -1,29 +1,7 @@
-# README #
+# REPORT SERVER FOR JASPERSOFT #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This repository contains a custom java rest server to generate jaspersoft report.
 
-### What is this repository for? ###
+The server runs on port 8080 and can be started with java -jar report-server.jar
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Version alpha 1.0
