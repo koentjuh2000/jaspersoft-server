@@ -34,7 +34,8 @@ public class Process {
         Map<String, Object> paramsReport = new HashMap<>();
         if (params != null) {
             ObjectMapper mapper = new ObjectMapper();
-            paramsReport = mapper.readValue(params, new TypeReference<Map<String, Object>>() {});
+            paramsReport = mapper.readValue(params, new TypeReference<Map<String, Object>>() {
+            });
         }
 
         JRDataSource defaultDataSource = new JREmptyDataSource();
@@ -42,7 +43,8 @@ public class Process {
         if (paramsCollection != null) {
             ObjectMapper mapper = new ObjectMapper();
             Map<String, List<Object>> paramsReportTmp = mapper.readValue(
-                    paramsCollection, new TypeReference<Map<String, List<Object>>>() {});
+                    paramsCollection, new TypeReference<Map<String, List<Object>>>() {
+                    });
             for (String key : paramsReportTmp.keySet()) {
                 if (key.equalsIgnoreCase("defaultDataSource")) {
                     defaultDataSource = new JRBeanCollectionDataSource(checkSubProperty(paramsReportTmp.get(key)));
@@ -60,7 +62,8 @@ public class Process {
                 if (reportsFolder.mkdirs()) {
                     Logger.log(Logger.Level.INFO, "Reports folder created at: " + reportsFolder.getAbsolutePath());
                 } else {
-                    throw new RuntimeException("Failed to create reports folder at: " + reportsFolder.getAbsolutePath());
+                    throw new RuntimeException(
+                            "Failed to create reports folder at: " + reportsFolder.getAbsolutePath());
                 }
             }
 
@@ -82,7 +85,7 @@ public class Process {
                 return jasperPrint;
             }
         } catch (IOException | RuntimeException | JRException e) {
-            Logger.log(Logger.Level.ERROR, "Error: " + e.getMessage());
+            Logger.log(Logger.Level.ERROR, e.getMessage());
         }
         return null;
     }

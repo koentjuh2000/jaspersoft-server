@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.koen.reportserver.services.logging.Logger;
+import com.koen.reportserver.services.logging.PDFGenerator;
 import com.koen.reportserver.services.reports.Process;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -19,27 +20,47 @@ public class PostRequestHandler implements HttpHandler {
             try {
                 byte[] requestBodyBytes = exchange.getRequestBody().readAllBytes();
                 String requestBody = new String(requestBodyBytes);
-                
-                // Process the request body
+
+                // Generate JasperPrint
+
                 JasperPrint jasperPrint = Process.generateAndSave(requestBody);
 
-                // Export the JasperPrint object to PDF byte array
+                if (jasperPrint == null) {
+                    throw new JRException("JasperPrint generation failed.");
+                }
+
+                // Convert JasperPrint to PDF bytes
                 byte[] pdfBytes = JasperExportManager.exportReportToPdf(jasperPrint);
 
-                // Set response headers for PDF
+                // Set PDF response headers
                 exchange.getResponseHeaders().set("Content-Type", "application/pdf");
                 exchange.getResponseHeaders().set("Content-Disposition", "inline; filename=\"report.pdf\"");
-                
                 exchange.sendResponseHeaders(200, pdfBytes.length);
+
                 try (OutputStream os = exchange.getResponseBody()) {
                     os.write(pdfBytes);
                 }
-            } catch (IOException | RuntimeException | JRException e) {
+            } catch (Exception e) {
                 Logger.log(Logger.Level.ERROR, e.getMessage());
-                exchange.sendResponseHeaders(500, -1); // Internal server error
+
+                // Generate error PDF using PDFBox
+                byte[] pdfBytes = PDFGenerator.generatePdfFromString("An error occurred while processing the request.");
+                if (pdfBytes == null) {
+                    exchange.sendResponseHeaders(500, -1);
+                    return;
+                }
+
+                // Send error PDF as response
+                exchange.getResponseHeaders().set("Content-Type", "application/pdf");
+                exchange.getResponseHeaders().set("Content-Disposition", "inline; filename=\"error.pdf\"");
+                exchange.sendResponseHeaders(200, pdfBytes.length);
+
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(pdfBytes);
+                }
             }
         } else {
-            exchange.sendResponseHeaders(200, -1); // -1 indicates no response body
+            exchange.sendResponseHeaders(405, -1); // Method not allowed
         }
     }
 }
