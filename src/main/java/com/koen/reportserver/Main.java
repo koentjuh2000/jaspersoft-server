@@ -10,7 +10,7 @@ public class Main {
         try {
             ReportHttpServer.start();
         } catch (IOException e) {
-            Logger.log(Logger.Level.ERROR, "Error: " + e.getMessage());
+            Logger.log(Logger.Level.ERROR, e.getMessage());
         }
     }
 }
