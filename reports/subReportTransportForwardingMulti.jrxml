@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subReportTransport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="82c199a5-cbb0-4c53-a154-611deaa30cd6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="project" class="java.lang.Integer"/>
+	<parameter name="operatingcompany" class="java.util.LinkedHashMap"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="container" class="java.lang.String"/>
+	<field name="container_booking" class="java.lang.Integer"/>
+	<field name="containerowner" class="java.lang.String"/>
+	<field name="containerType" class="java.lang.String"/>
+	<field name="sealnr" class="java.lang.String"/>
+	<field name="reference" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="colli" class="java.lang.String"/>
+	<field name="goodsdescription" class="java.lang.String"/>
+	<field name="un_code" class="java.lang.String"/>
+	<field name="gross" class="java.lang.Double"/>
+	<field name="volume" class="java.lang.Double"/>
+	<field name="details" class="java.util.ArrayList"/>
+	<field name="goods" class="java.lang.String"/>
+	<field name="trucking_rate" class="java.lang.String"/>
+	<variable name="descriptionContainer" class="java.lang.String">
+		<variableExpression><![CDATA[$F{containerType}+" "+$F{container} +" "+$F{containerowner}]]></variableExpression>
+	</variable>
+	<variable name="group_count" class="java.lang.Integer" incrementType="Group" incrementGroup="Group1" calculation="Count">
+		<variableExpression><![CDATA[$V{group_count} + 1]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="Group1_Count" class="java.lang.Integer"/>
+	<variable name="colliGoods" class="java.lang.String" resetType="Group" resetGroup="Group1">
+		<variableExpression><![CDATA[$F{colli}.trim() +" "+ $F{goodsdescription}.trim() +", "+ String.format("%.0f", $F{gross}) +" KGS"]]></variableExpression>
+	</variable>
+	<group name="Group1" keepTogether="true">
+		<groupExpression><![CDATA[$F{container_booking}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<staticText>
+					<reportElement x="0" y="8" width="55" height="13" uuid="6b666d30-8bc9-4e33-a928-ef83fc9cbbd9">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CONTAINER]]></text>
+				</staticText>
+				<textField evaluationTime="Auto">
+					<reportElement x="71" y="8" width="479" height="13" uuid="843e46e9-fdbd-456a-b664-7fbf573d185a">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{containerType} + " " +$F{container}  + " TMA Reference: "+ $F{container_booking}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Group1">
+					<reportElement x="55" y="8" width="16" height="13" uuid="df4dc4be-8943-4753-b6ba-cbbf29510378"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{group_count}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<line>
+					<reportElement x="1" y="-2" width="550" height="1" uuid="70e79cea-529c-4e38-8030-d43d9bd20e53">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport isUsingCache="false">
+				<reportElement positionType="Float" x="0" y="3" width="550" height="30" isPrintInFirstWholeBand="true" uuid="bae58e9a-c62e-44ac-905f-45d9821d87a5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreportParameter name="goods">
+					<subreportParameterExpression><![CDATA[$F{goods}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="gross">
+					<subreportParameterExpression><![CDATA[$F{gross}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{details})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["reports/subReportDetailsTrasportBookingsForwardingMulti.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
