@@ -3,9 +3,9 @@ package com.koen.reportserver.services.http;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import com.koen.reportserver.services.logging.ErrorResponse;
 import com.koen.reportserver.services.logging.Logger;
-import com.koen.reportserver.services.logging.PDFGenerator;
-import com.koen.reportserver.services.reports.Process;
+import com.koen.reportserver.services.reports.GenerateReport;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -23,7 +23,7 @@ public class PostRequestHandler implements HttpHandler {
 
                 // Generate JasperPrint
 
-                JasperPrint jasperPrint = Process.generateAndSave(requestBody);
+                JasperPrint jasperPrint = GenerateReport.generateAndSave(requestBody);
 
                 if (jasperPrint == null) {
                     throw new JRException("JasperPrint generation failed.");
@@ -44,7 +44,7 @@ public class PostRequestHandler implements HttpHandler {
                 Logger.log(Logger.Level.ERROR, e.getMessage());
 
                 // Generate error PDF using PDFBox
-                byte[] pdfBytes = PDFGenerator.generatePdfFromString("An error occurred while processing the request.");
+                byte[] pdfBytes = ErrorResponse.generatePdfFromString("An error occurred while processing the request.");
                 if (pdfBytes == null) {
                     exchange.sendResponseHeaders(500, -1);
                     return;

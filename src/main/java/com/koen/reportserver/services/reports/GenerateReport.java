@@ -23,7 +23,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-public class Process {
+public class GenerateReport {
 
     public static JasperPrint generateAndSave(String body) throws JsonProcessingException {
         Map<String, String> reportData = ExtractData.logFormDataAttributes(body);
@@ -62,7 +62,7 @@ public class Process {
                 if (reportsFolder.mkdirs()) {
                     Logger.log(Logger.Level.INFO, "Reports folder created at: " + reportsFolder.getAbsolutePath());
                 } else {
-                    throw new RuntimeException(
+                    Logger.log(Logger.Level.ERROR,
                             "Failed to create reports folder at: " + reportsFolder.getAbsolutePath());
                 }
             }
@@ -70,7 +70,7 @@ public class Process {
             File reportFile = new File(reportsFolder, reportName + ".jasper");
 
             if (!reportFile.exists()) {
-                throw new RuntimeException("Report file not found at: " + reportFile.getAbsolutePath());
+                Logger.log(Logger.Level.ERROR, "Report file not found at: " + reportFile.getAbsolutePath());
             }
 
             try (InputStream reportStream = new FileInputStream(reportFile)) {
@@ -90,6 +90,7 @@ public class Process {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     private static List<Object> checkSubProperty(List<Object> subList) {
         subList.forEach((x) -> {
             Map<String, Object> tmp = (Map<String, Object>) x;
